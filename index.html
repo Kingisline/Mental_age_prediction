@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Age Detection</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Razorpay Payment Gateway -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Mental Age Detection</h1>
+    <form id="mental-age-form">
+      <div class="question">
+        <p>1. When making decisions, you mostly rely on:</p>
+        <label><input type="radio" name="q1" value="3" required> A) Logic and facts</label>
+        <label><input type="radio" name="q1" value="2"> B) Gut feeling</label>
+        <label><input type="radio" name="q1" value="1"> C) Advice from others</label>
+        <label><input type="radio" name="q1" value="0"> D) Whatever feels easiest</label>
+      </div>
+      <div class="question">
+        <p>2. Your reaction to sudden change is:</p>
+        <label><input type="radio" name="q2" value="3"> A) Analyze and adapt</label>
+        <label><input type="radio" name="q2" value="2"> B) Excited curiosity</label>
+        <label><input type="radio" name="q2" value="1"> C) Stress and resistance</label>
+        <label><input type="radio" name="q2" value="0"> D) Indifference</label>
+      </div>
+      <div class="question">
+        <p>3. How do you handle conflict?</p>
+        <label><input type="radio" name="q3" value="3"> A) Discuss calmly</label>
+        <label><input type="radio" name="q3" value="2"> B) Use humor to defuse</label>
+        <label><input type="radio" name="q3" value="1"> C) Avoid it</label>
+        <label><input type="radio" name="q3" value="0"> D) React emotionally</label>
+      </div>
+      <div class="question">
+        <p>4. Your ideal weekend involves:</p>
+        <label><input type="radio" name="q4" value="3"> A) Learning something new</label>
+        <label><input type="radio" name="q4" value="2"> B) Socializing with friends</label>
+        <label><input type="radio" name="q4" value="1"> C) Relaxing alone</label>
+        <label><input type="radio" name="q4" value="0"> D) Spontaneous adventures</label>
+      </div>
+      <div class="question">
+        <p>5. When someone disagrees with you, you:</p>
+        <label><input type="radio" name="q5" value="3"> A) Debate respectfully</label>
+        <label><input type="radio" name="q5" value="2"> B) Try to understand their view</label>
+        <label><input type="radio" name="q5" value="1"> C) Drop the topic</label>
+        <label><input type="radio" name="q5" value="0"> D) Insist you're right</label>
+      </div>
+      <div class="question">
+        <p>6. Your creativity shines when:</p>
+        <label><input type="radio" name="q6" value="3"> A) Solving problems</label>
+        <label><input type="radio" name="q6" value="2"> B) Making art/music</label>
+        <label><input type="radio" name="q6" value="1"> C) Daydreaming</label>
+        <label><input type="radio" name="q6" value="0"> D) Mimicking others' ideas</label>
+      </div>
+      <div class="question">
+        <p>7. How often do you reflect on life?</p>
+        <label><input type="radio" name="q7" value="3"> A) Daily</label>
+        <label><input type="radio" name="q7" value="2"> B) Occasionally</label>
+        <label><input type="radio" name="q7" value="1"> C) Rarely</label>
+        <label><input type="radio" name="q7" value="0"> D) Only during crises</label>
+      </div>
+      <div class="question">
+        <p>8. Your time management style:</p>
+        <label><input type="radio" name="q8" value="3"> A) Strict schedules</label>
+        <label><input type="radio" name="q8" value="2"> B) Flexible but goal-oriented</label>
+        <label><input type="radio" name="q8" value="1"> C) Procrastination</label>
+        <label><input type="radio" name="q8" value="0"> D) No plan at all</label>
+      </div>
+      <div class="question">
+        <p>9. When bored, you:</p>
+        <label><input type="radio" name="q9" value="3"> A) Start a project</label>
+        <label><input type="radio" name="q9" value="2"> B) Call a friend</label>
+        <label><input type="radio" name="q9" value="1"> C) Scroll social media</label>
+        <label><input type="radio" name="q9" value="0"> D) Take a nap</label>
+      </div>
+      <div class="question">
+        <p>10. Your view on rules:</p>
+        <label><input type="radio" name="q10" value="3"> A) Follow unless unreasonable</label>
+        <label><input type="radio" name="q10" value="2"> B) Bend creatively</label>
+        <label><input type="radio" name="q10" value="1"> C) Follow strictly</label>
+        <label><input type="radio" name="q10" value="0"> D) Ignore often</label>
+      </div>
+      <div class="question">
+        <p>11. How do you learn best?</p>
+        <label><input type="radio" name="q11" value="3"> A) Reading/research</label>
+        <label><input type="radio" name="q11" value="2"> B)  Hands-on practice</label>
+        <label><input type="radio" name="q11" value="1"> C) Watching others</label>
+        <label><input type="radio" name="q11" value="0"> D) Trial and error</label>
+      </div>
+      <div class="question">
+        <p>12. Your biggest fear is:</p>
+        <label><input type="radio" name="q12" value="3"> A) Failure</label>
+        <label><input type="radio" name="q12" value="2"> B) Loneliness</label>
+        <label><input type="radio" name="q12" value="1"> C) Uncertainty</label>
+        <label><input type="radio" name="q12" value="0"> D) Boredom</label>
+      </div>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <!-- Payment/Ad Gate Modal -->
+  <div id="payment-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🎯 Unlock Your Results</h2>
+        <p>Choose how you'd like to view your mental age results:</p>
+      </div>
+      <div class="payment-options">
+        <div class="payment-option">
+          <div class="option-icon">💰</div>
+          <h3>Quick Payment</h3>
+          <p>Pay ₹1 and get instant access</p>
+          <button id="pay-btn" class="payment-btn">Pay ₹1</button>
+        </div>
+        <div class="payment-option">
+          <div class="option-icon">📺</div>
+          <h3>Watch Ad</h3>
+          <p>Watch a short advertisement</p>
+          <button id="watch-ad-btn" class="payment-btn">Watch Ad</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="disclaimer">* Your results are ready! Choose an option above to continue.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ad Container -->
+  <div id="ad-container" class="ad-container" style="display: none;">
+    <div class="ad-content">
+      <h3>📺 Advertisement</h3>
+      <div id="ad-placeholder" class="ad-placeholder">
+        <p>Loading advertisement...</p>
+        <div class="ad-progress">
+          <div class="progress-bar"></div>
+        </div>
+        <p class="ad-timer">Time remaining: <span id="ad-timer">30</span>s</p>
+      </div>
+      <button id="skip-ad-btn" class="skip-ad-btn" style="display: none;">Skip Ad</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <footer class="footer">
+    <nav>
+      <a href="contact.html">Contact</a> |
+      <a href="terms.html">Terms & Conditions</a> |
+      <a href="refund.html">Cancellations & Refund Policy</a> |
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
+    <p>&copy; 2024 Mental Age Detection. All rights reserved.</p>
+  </footer>
+</body>
+</html> 
